@@ -4,14 +4,13 @@ interface JQueryStatic {
 	alert(p: any): any;
 }
 
-
 class dpDialog {
 
 	static Success = (Message: string, Width: number = 250 ) => {
 		$.alert({
 			boxWidth: Width + "px",
 			useBootstrap: false,
-			escapeKey: true,
+			escapeKey: true, 
 			backgroundDismiss: true,
 			type: "green",
 			title: "Успех",
@@ -66,7 +65,7 @@ class dpDialog {
 			Width: 300,
 			Color:"blue"
 		};
-
+		
 		var Settings = $.extend({}, Defaults, options);
 
 		$.confirm({
