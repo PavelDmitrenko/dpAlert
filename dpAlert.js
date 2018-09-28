@@ -1,7 +1,7 @@
 var dpDialog = /** @class */ (function () {
     function dpDialog() {
     }
-    dpDialog.Success = function (Message, Width) {
+    dpDialog.success = function (Message, Width) {
         if (Width === void 0) { Width = 250; }
         $.alert({
             boxWidth: Width + "px",
@@ -19,25 +19,25 @@ var dpDialog = /** @class */ (function () {
             }
         });
     };
-    dpDialog.Error = function (options) {
-        var Defaults = {
-            Title: "Ошибка",
-            Message: "",
-            Width: 300,
-            Callback: null
+    dpDialog.error = function (options) {
+        var defaults = {
+            title: "Ошибка",
+            message: "",
+            width: 300,
+            callback: null
         };
-        var Settings = $.extend({}, Defaults, options);
+        var settings = $.extend({}, defaults, options);
         $.alert({
-            boxWidth: Settings.Width + "px",
+            boxWidth: settings.width + "px",
             useBootstrap: false,
             escapeKey: true,
             backgroundDismiss: true,
             type: "red",
-            title: Settings.Title,
-            content: Settings.Message,
+            title: settings.title,
+            content: settings.message,
             onClose: function () {
-                if (Settings.Callback != null)
-                    Settings.Callback();
+                if (settings.callback != null)
+                    settings.callback();
             },
             buttons: {
                 OK: {
@@ -47,37 +47,37 @@ var dpDialog = /** @class */ (function () {
             }
         });
     };
-    dpDialog.Confirm = function (options) {
+    dpDialog.confirm = function (options) {
         var Defaults = {
-            Title: "",
-            Message: "",
-            Yes: null,
-            No: null,
-            Width: 300,
-            Color: "blue"
+            title: "",
+            message: "",
+            yes: null,
+            no: null,
+            width: 300,
+            color: "blue"
         };
         var Settings = $.extend({}, Defaults, options);
         $.confirm({
             escapeKey: true,
             backgroundDismiss: true,
-            boxWidth: Settings.Width + "px",
+            boxWidth: Settings.width + "px",
             useBootstrap: false,
-            title: Settings.Title,
-            type: Settings.Color,
-            content: Settings.Message,
+            title: Settings.title,
+            type: Settings.color,
+            content: Settings.message,
             buttons: {
                 yes: {
                     text: "Да",
                     action: function () {
-                        Settings.Yes();
+                        Settings.yes();
                         return true;
                     }
                 },
                 no: {
                     text: "Нет",
                     action: function () {
-                        if (Settings.No !== null)
-                            Settings.No();
+                        if (Settings.no !== null)
+                            Settings.no();
                         return true;
                     }
                 }
