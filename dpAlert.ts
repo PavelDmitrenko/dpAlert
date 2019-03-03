@@ -4,14 +4,29 @@ interface JQueryStatic {
 	alert(p: any): any;
 }
 
+interface IdpDialogErrorOptions {
+	message: string;
+	title?: string;
+	width?: number;
+	callback?: () => void;
+}
+
+interface IdpDialogConfirmOptions {
+	title?: string;
+	message?: string;
+	yes?: ()=> void;
+	no?: () => void;
+	width?: number;
+	color?: string;
+}
 
 class dpDialog {
 
-	static Success = (Message: string, Width: number = 250 ) => {
+	static success = (Message: string, Width: number = 250 ) => {
 		$.alert({
 			boxWidth: Width + "px",
 			useBootstrap: false,
-			escapeKey: true,
+			escapeKey: true, 
 			backgroundDismiss: true,
 			type: "green",
 			title: "Успех",
@@ -25,27 +40,28 @@ class dpDialog {
 		});
 	}
 
-	static Error = (options: any) => {
+	static error = (options: IdpDialogErrorOptions) => {
 
-		var Defaults = {
-			Title: "Ошибка",
-			Message: "",
-			Width: 300,
-			Callback:null
+		const defaults: IdpDialogErrorOptions = {
+			title: "Ошибка",
+			message: "",
+			width: 300,
+			callback:null
 		};
-		var Settings = $.extend({}, Defaults, options);
+
+		const settings = $.extend({}, defaults, options) as IdpDialogErrorOptions;
 
 		$.alert({
-			boxWidth: Settings.Width + "px",
+			boxWidth: settings.width + "px",
 			useBootstrap: false,
 			escapeKey: true,
 			backgroundDismiss: true,
 			type: "red",
-			title: Settings.Title,
-			content: Settings.Message,
+			title: settings.title,
+			content: settings.message,
 			onClose: () => {
-				if (Settings.Callback != null)
-					Settings.Callback();
+				if (settings.callback != null)
+					settings.callback();
 			},
 			buttons: {
 				OK: {
@@ -56,32 +72,32 @@ class dpDialog {
 		});
 	}
 
-	static Confirm = (options: any) => {
+	static confirm = (options: IdpDialogConfirmOptions) => {
 
-		var Defaults = {
-			Title:  "",
-			Message: "",
-			Yes: null, 
-			No: null,
-			Width: 300,
-			Color:"blue"
+		var Defaults: IdpDialogConfirmOptions = {
+			title:  "",
+			message: "",
+			yes: null, 
+			no: null,
+			width: 300,
+			color:"blue"
 		};
-
-		var Settings = $.extend({}, Defaults, options);
+		
+		var Settings: IdpDialogConfirmOptions = $.extend({}, Defaults, options);
 
 		$.confirm({
 			escapeKey: true,
 			backgroundDismiss: true,
-			boxWidth: Settings.Width + "px",
+			boxWidth: Settings.width + "px",
 			useBootstrap: false,
-			title: Settings.Title,
-			type: Settings.Color,
-			content: Settings.Message,
+			title: Settings.title,
+			type: Settings.color,
+			content: Settings.message,
 			buttons: {
 				yes: {
 					text: "Да",
 					action: () => {
-						Settings.Yes();
+						Settings.yes();
 						return true;
 					}
 				},
@@ -89,8 +105,8 @@ class dpDialog {
 				no: {
 					text: "Нет",
 					action: () => {
-						if (Settings.No !== null)
-							Settings.No();
+						if (Settings.no !== null)
+							Settings.no();
 						return true;
 					}
 				}
