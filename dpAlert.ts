@@ -31,6 +31,9 @@ class dpDialog {
 			type: "green",
 			title: "Успех",
 			content: Message,
+			animation: "zoom",
+			closeAnimation:"zoom",
+			animateFromElement:false,
 			buttons: {
 				OK: { 
 					text: "OK",
@@ -58,6 +61,9 @@ class dpDialog {
 			backgroundDismiss: true,
 			type: "red",
 			title: settings.title,
+			animation: "zoom",
+			closeAnimation:"zoom",
+			animateFromElement:false,
 			content: settings.message,
 			onClose: () => {
 				if (settings.callback != null)
@@ -92,6 +98,9 @@ class dpDialog {
 			useBootstrap: false,
 			title: Settings.title,
 			type: Settings.color,
+			animation: "zoom",
+			closeAnimation:"zoom",
+			animateFromElement:false,
 			content: Settings.message,
 			buttons: {
 				yes: {
